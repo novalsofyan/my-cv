@@ -33,7 +33,7 @@ export default function Header() {
     >
       <div className="flex items-center justify-between h-16 px-4 md:px-8 md:max-w-[1200px] md:mx-auto">
         {/* Logo kiri */}
-        <div className="flex items-center gap-2 text-2xl md:text-3xl font-bold text-gray-800">
+        <div className="flex items-center gap-2 text-2xl md:text-3xl font-bold text-gray-800 select-none">
           <FileText className="text-red-600 w-6 h-6 md:w-7 md:h-7" />
           <span>MyCV!</span>
         </div>
@@ -65,10 +65,7 @@ export default function Header() {
         <ul className="hidden md:flex space-x-4 text-xl font-semibold text-gray-700">
           {menuItems.map((item) => (
             <li key={item.path}>
-              <Link
-                to={item.path}
-                className="hover:text-red-600 transition-colors duration-300"
-              >
+              <Link to={item.path} className="hover:text-red-600 transition-colors duration-300">
                 {item.label}
               </Link>
             </li>
@@ -85,11 +82,7 @@ export default function Header() {
         <ul className="flex flex-col space-y-4 p-4 text-lg bg-white shadow-md">
           {menuItems.map((item) => (
             <li key={item.path}>
-              <Link
-                to={item.path}
-                className="hover:text-red-600 transition-colors duration-300"
-                onClick={closeMenu}
-              >
+              <Link to={item.path} className="hover:text-red-600 transition-colors duration-300" onClick={closeMenu}>
                 {item.label}
               </Link>
             </li>

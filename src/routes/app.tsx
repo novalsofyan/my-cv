@@ -25,8 +25,7 @@ export const Route = createFileRoute('/app')({
       },
       {
         name: 'keywords',
-        content:
-          'CV Builder, Online CV, Resume, Curriculum Vitae, Profesional CV',
+        content: 'CV Builder, Online CV, Resume, Curriculum Vitae, Profesional CV',
       },
       {
         name: 'author',
@@ -87,8 +86,7 @@ function CVBuilder() {
     ])
   }
 
-  const removeSection = (id: number) =>
-    setSections(sections.filter((s) => s.id !== id))
+  const removeSection = (id: number) => setSections(sections.filter((s) => s.id !== id))
 
   const addEntry = (sectionId: number) => {
     setSections(
@@ -96,10 +94,7 @@ function CVBuilder() {
         s.id === sectionId
           ? {
               ...s,
-              entries: [
-                ...s.entries,
-                { id: Date.now(), item: '', year: '', poinList: [] },
-              ],
+              entries: [...s.entries, { id: Date.now(), item: '', year: '', poinList: [] }],
             }
           : s,
       ),
@@ -108,11 +103,7 @@ function CVBuilder() {
 
   const removeEntry = (sectionId: number, entryId: number) => {
     setSections(
-      sections.map((s) =>
-        s.id === sectionId
-          ? { ...s, entries: s.entries.filter((e) => e.id !== entryId) }
-          : s,
-      ),
+      sections.map((s) => (s.id === sectionId ? { ...s, entries: s.entries.filter((e) => e.id !== entryId) } : s)),
     )
   }
 
@@ -159,63 +150,42 @@ function CVBuilder() {
   // ==============================
   // Input Change Handlers
   // ==============================
-  const handleFormChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
+  const handleFormChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData({ ...formData, [name]: value })
   }
 
   const handleSectionTitleChange = (sectionId: number, value: string) => {
-    setSections(
-      sections.map((s) => (s.id === sectionId ? { ...s, title: value } : s)),
-    )
+    setSections(sections.map((s) => (s.id === sectionId ? { ...s, title: value } : s)))
   }
 
-  const handleEntryChange = (
-    sectionId: number,
-    entryId: number,
-    value: string,
-  ) => {
+  const handleEntryChange = (sectionId: number, entryId: number, value: string) => {
     setSections(
       sections.map((s) =>
         s.id === sectionId
           ? {
               ...s,
-              entries: s.entries.map((e) =>
-                e.id === entryId ? { ...e, item: value } : e,
-              ),
+              entries: s.entries.map((e) => (e.id === entryId ? { ...e, item: value } : e)),
             }
           : s,
       ),
     )
   }
 
-  const handleYearChange = (
-    sectionId: number,
-    entryId: number,
-    value: string,
-  ) => {
+  const handleYearChange = (sectionId: number, entryId: number, value: string) => {
     setSections(
       sections.map((s) =>
         s.id === sectionId
           ? {
               ...s,
-              entries: s.entries.map((e) =>
-                e.id === entryId ? { ...e, year: value } : e,
-              ),
+              entries: s.entries.map((e) => (e.id === entryId ? { ...e, year: value } : e)),
             }
           : s,
       ),
     )
   }
 
-  const handlePoinChange = (
-    sectionId: number,
-    entryId: number,
-    poinId: number,
-    value: string,
-  ) => {
+  const handlePoinChange = (sectionId: number, entryId: number, poinId: number, value: string) => {
     setSections(
       sections.map((s) =>
         s.id === sectionId
@@ -225,9 +195,7 @@ function CVBuilder() {
                 e.id === entryId
                   ? {
                       ...e,
-                      poinList: e.poinList.map((p) =>
-                        p.id === poinId ? { ...p, poin: value } : p,
-                      ),
+                      poinList: e.poinList.map((p) => (p.id === poinId ? { ...p, poin: value } : p)),
                     }
                   : e,
               ),
@@ -317,42 +285,30 @@ function CVBuilder() {
 
         {/* Sections */}
         {sections.map((section) => (
-          <div
-            key={section.id}
-            className="border p-3 rounded-lg mb-2 bg-gray-50"
-          >
+          <div key={section.id} className="border p-3 rounded-lg mb-2 bg-gray-50">
             <input
               type="text"
               placeholder="Judul Section"
               value={section.title}
-              onChange={(e) =>
-                handleSectionTitleChange(section.id, e.target.value)
-              }
+              onChange={(e) => handleSectionTitleChange(section.id, e.target.value)}
               className="w-full border px-2 py-1 rounded mb-2"
             />
 
             {section.entries.map((entry) => (
-              <div
-                key={entry.id}
-                className="border p-2 rounded-lg mb-2 bg-white"
-              >
+              <div key={entry.id} className="border p-2 rounded-lg mb-2 bg-white">
                 <div className="flex gap-2 mb-2">
                   <input
                     type="text"
                     placeholder="Item"
                     value={entry.item}
-                    onChange={(e) =>
-                      handleEntryChange(section.id, entry.id, e.target.value)
-                    }
+                    onChange={(e) => handleEntryChange(section.id, entry.id, e.target.value)}
                     className="w-2/3 border px-2 py-1 rounded"
                   />
                   <input
                     type="text"
                     placeholder="Tahun (opsional)"
                     value={entry.year || ''}
-                    onChange={(e) =>
-                      handleYearChange(section.id, entry.id, e.target.value)
-                    }
+                    onChange={(e) => handleYearChange(section.id, entry.id, e.target.value)}
                     className="w-1/3 border px-2 py-1 rounded"
                   />
                 </div>
@@ -363,19 +319,12 @@ function CVBuilder() {
                       type="text"
                       placeholder="Poin"
                       value={p.poin}
-                      onChange={(e) =>
-                        handlePoinChange(
-                          section.id,
-                          entry.id,
-                          p.id,
-                          e.target.value,
-                        )
-                      }
+                      onChange={(e) => handlePoinChange(section.id, entry.id, p.id, e.target.value)}
                       className="w-full border px-2 py-1 rounded"
                     />
                     <button
                       onClick={() => removePoin(section.id, entry.id, p.id)}
-                      className="text-red-500 hover:text-red-700"
+                      className="text-red-500 hover:text-red-700 transition-colors duration-300 cursor-pointer"
                     >
                       <Trash2 className="w-3 h-3" />
                     </button>
@@ -384,14 +333,14 @@ function CVBuilder() {
 
                 <button
                   onClick={() => addPoin(section.id, entry.id)}
-                  className="flex items-center gap-1 text-xs bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 mt-1"
+                  className="flex items-center gap-1 text-xs bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 mt-1 transition-colors duration-300 cursor-pointer"
                 >
                   <Plus className="w-3 h-3" /> Tambah Poin
                 </button>
 
                 <button
                   onClick={() => removeEntry(section.id, entry.id)}
-                  className="flex items-center gap-1 text-red-500 mt-2 hover:text-red-700"
+                  className="flex items-center gap-1 text-red-500 mt-2 hover:text-red-700 transition-colors duration-300 cursor-pointer"
                 >
                   <Trash2 className="w-3 h-3" /> Hapus Item
                 </button>
@@ -400,14 +349,14 @@ function CVBuilder() {
 
             <button
               onClick={() => addEntry(section.id)}
-              className="flex items-center gap-1 mx-auto text-sm bg-green-400 text-white px-3 py-1 rounded hover:bg-green-500 mt-1"
+              className="flex items-center gap-1 mx-auto text-sm bg-green-400 text-white px-3 py-1 rounded hover:bg-green-500 mt-1 transition-colors duration-300 cursor-pointer"
             >
               <Plus className="w-3 h-3" /> Tambah Item
             </button>
 
             <button
               onClick={() => removeSection(section.id)}
-              className="flex items-center gap-1 text-red-500 mt-2 hover:text-red-700"
+              className="flex items-center gap-1 text-red-500 mt-2 hover:text-red-700 transition-colors duration-300 cursor-pointer"
             >
               <Trash2 className="w-3 h-3" /> Hapus Section
             </button>
@@ -417,7 +366,7 @@ function CVBuilder() {
         <div className="flex justify-center mt-4">
           <button
             onClick={addSection}
-            className="flex items-center gap-1 text-sm bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 cursor-pointer"
+            className="flex items-center gap-1 text-sm bg-green-500 text-white px-3 py-1 rounded transition-colors duration-300 hover:bg-green-600 cursor-pointer"
           >
             <Plus className="w-4 h-4" /> Tambah Section
           </button>
@@ -428,9 +377,7 @@ function CVBuilder() {
         <h2 className="text-xl font-semibold mb-4 text-center text-gray-700">
           Preview CV
           <br />
-          <section className="text-sm">
-            (pengguna mobile gunakan Firefox untuk melihat preview)
-          </section>
+          <section className="text-sm">(pengguna mobile gunakan Firefox untuk melihat preview)</section>
         </h2>
         <CVPreview formData={formData} sections={mappedSections} />
       </div>

@@ -35,7 +35,10 @@ function HomePage() {
     <main className="flex flex-col justify-center items-center max-w-4xl mx-auto py-4 px-2 text-center grow">
       <h1 className="text-4xl font-bold mb-4 text-gray-800">Buat CV Profesional dengan Cepat</h1>
       <p className="text-gray-600 mb-6">Masukkan data kamu dan lihat hasil CV secara langsung.</p>
-      <Link to="/app" className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+      <Link
+        to="/app"
+        className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors duration-300"
+      >
         Mulai Buat CV
       </Link>
     </main>

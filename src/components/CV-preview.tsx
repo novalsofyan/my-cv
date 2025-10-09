@@ -39,10 +39,7 @@ export default function CVPreview({ formData, sections }: CVPreviewProps) {
     // Header: Nama
     pdf.setFont('helvetica', 'bold')
     pdf.setFontSize(18)
-    const nameLines = pdf.splitTextToSize(
-      formData.name || 'Nama Anda',
-      pageWidth - 2 * margin,
-    )
+    const nameLines = pdf.splitTextToSize(formData.name || 'Nama Anda', pageWidth - 2 * margin)
     for (const line of nameLines) {
       y = checkPageBreak(y)
       pdf.text(line, pageWidth / 2, y, { align: 'center' })
@@ -53,10 +50,7 @@ export default function CVPreview({ formData, sections }: CVPreviewProps) {
     pdf.setFont('helvetica', 'normal')
     pdf.setFontSize(11)
     const contactText = `${formData.email || 'Email'} | ${formData.phone || 'Telepon'} | ${formData.address || 'Alamat'}`
-    const contactLines = pdf.splitTextToSize(
-      contactText,
-      pageWidth - 2 * margin,
-    )
+    const contactLines = pdf.splitTextToSize(contactText, pageWidth - 2 * margin)
     for (const line of contactLines) {
       y = checkPageBreak(y)
       pdf.text(line, pageWidth / 2, y, { align: 'center' })
@@ -66,16 +60,7 @@ export default function CVPreview({ formData, sections }: CVPreviewProps) {
 
     // Summary
     if (formData.summary.trim()) {
-      y = drawJustifiedText(
-        pdf,
-        formData.summary,
-        margin,
-        y,
-        pageWidth - 2 * margin,
-        12,
-        pageHeight,
-        marginBottom,
-      )
+      y = drawJustifiedText(pdf, formData.summary, margin, y, pageWidth - 2 * margin, 12, pageHeight, marginBottom)
     }
 
     // Sections
@@ -86,17 +71,7 @@ export default function CVPreview({ formData, sections }: CVPreviewProps) {
         for (const entry of s.entries) {
           const leftText = entry.content
           const rightText = entry.year || ''
-          y = drawLeftRightText(
-            pdf,
-            leftText,
-            rightText,
-            margin,
-            pageWidth - margin,
-            y,
-            11,
-            pageHeight,
-            marginBottom,
-          )
+          y = drawLeftRightText(pdf, leftText, rightText, margin, pageWidth - margin, y, 11, pageHeight, marginBottom)
         }
       }
     }
@@ -232,9 +207,7 @@ export default function CVPreview({ formData, sections }: CVPreviewProps) {
       if (!pdfUrl) return
       const link = document.createElement('a')
       link.href = pdfUrl
-      link.download = formData.name.trim()
-        ? `CV - ${formData.name}.pdf`
-        : 'MyCV.pdf'
+      link.download = formData.name.trim() ? `CV - ${formData.name}.pdf` : 'MyCV.pdf'
       link.click()
     }, 200)
   }
@@ -243,7 +216,7 @@ export default function CVPreview({ formData, sections }: CVPreviewProps) {
     <div className="flex flex-col items-center">
       <button
         onClick={generatePDF}
-        className="flex items-center justify-center mb-4 w-fit bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition cursor-pointer"
+        className="flex items-center justify-center mb-4 w-fit bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors duration-300 cursor-pointer"
       >
         Preview PDF
       </button>
@@ -259,7 +232,7 @@ export default function CVPreview({ formData, sections }: CVPreviewProps) {
           />
           <button
             onClick={handleDownloadPDF}
-            className="flex items-center justify-center mt-2 w-fit bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition cursor-pointer"
+            className="flex items-center justify-center mt-2 w-fit bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition-colors duration-300 cursor-pointer"
           >
             Download PDF
           </button>
