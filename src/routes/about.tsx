@@ -39,7 +39,7 @@ export const Route = createFileRoute('/about')({
 
 function AboutPage() {
   return (
-    <main className="flex flex-col justify-center max-w-4xl mx-auto py-4 px-2 grow text-lg md:text-2xl">
+    <main className="flex flex-col justify-center max-w-4xl mx-auto py-4 px-2 grow text-lg md:text-2xl mt-16">
       <h1 className="text-3xl md:text-4xl font-bold text-center mb-6">Tentang MyCV</h1>
 
       <p className="mb-4">
